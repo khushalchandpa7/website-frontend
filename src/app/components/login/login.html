@@ -1,0 +1,122 @@
+<div class="login-wrapper min-h-screen w-full flex flex-col lg:flex-row bg-white">
+  <div class="login-image-pane hidden lg:block lg:w-1/2 xl:w-[55%] relative overflow-hidden" aria-label="Decorative Artwork">
+    <img
+      src="assets/image/login_img.png"
+      alt="Login Image"
+      class="absolute inset-0 w-full h-full object-cover object-center"
+    />
+  </div>
+
+  <main class="login-form-container flex-1 flex flex-col justify-center items-center px-6 py-10 sm:px-12 md:px-16 lg:px-12 xl:px-20">
+    <div class="w-full max-w-[400px]">
+      <header class="mb-8">
+        <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-[32px]">Welcome back</h1>
+        <p class="mt-2 text-sm text-gray-500">Welcome back! Please enter your details.</p>
+      </header>
+
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-5">
+        <div class="space-y-1.5">
+          <label for="email" class="block text-sm font-medium text-gray-700">Email <span class="text-red-600">*</span></label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            formControlName="email"
+            placeholder="Enter your email"
+            class="w-full px-3.5 py-2.5 text-sm text-gray-900 placeholder:text-gray-400 bg-white border border-gray-300 rounded-lg shadow-xs focus:outline-none focus:ring-2 focus:ring-gray-900/10 focus:border-gray-900 transition-colors"
+            autocomplete="email"
+          />
+          @if (this.emailControl?.invalid && (this.emailControl?.touched || this.emailControl?.dirty)) {
+            @if (this.emailControl?.hasError('required')) {
+              <span class="text-xs text-red-600">Please enter your email address</span>
+            } @else if (this.emailControl?.hasError('email')) {
+              <span class="text-xs text-red-600">Invalid Email</span>
+            }
+          }
+        </div>
+
+        <div class="space-y-1.5">
+          <label for="password" class="block text-sm font-medium text-gray-700">Password <span class="text-red-600">*</span></label>
+          <div class="relative">
+            <input
+              [type]="isPasswordVisible() ? 'text' : 'password'"
+              id="password"
+              name="password"
+              required
+              formControlName="password"
+              [placeholder]="isPasswordVisible() ? '12345678' : '••••••••'"
+              class="w-full pl-3.5 pr-11 py-2.5 text-sm text-gray-900 placeholder:text-gray-400 bg-white border border-gray-300 rounded-lg shadow-xs focus:outline-none focus:ring-2 focus:ring-gray-900/10 focus:border-gray-900 transition-colors"
+              autocomplete="current-password"
+            />
+            <button
+              type="button"
+              (click)="togglePasswordVisibility()"
+              class="pass-eye-container absolute inset-y-0 right-0 pr-3.5 flex items-center text-gray-400 hover:text-gray-600 focus:outline-none transition-colors cursor-pointer"
+            >
+              <img class="pass-eye-img" [src]="getEyeIconPath" alt="Toggle password visibility" class="w-4 h-4" />
+            </button>
+          </div>
+          @if (this.passwordControl?.invalid && (this.passwordControl?.touched || this.passwordControl?.dirty)) {
+            @if (this.passwordControl?.hasError('required')) {
+                <span class="text-xs text-red-600">Please enter your password</span>
+            }
+            @if (this.passwordControl?.hasError('minlength')) {
+                <span class="text-xs text-red-600">Password must be 8 charcters long</span>
+            }
+          }
+        </div>
+
+        <div class="flex items-center justify-between pt-0.5">
+          <div class="flex items-center gap-2">
+            <input
+              id="remember"
+              name="remember"
+              type="checkbox"
+              formControlName="rememberMe"
+              (click)="onRememberMe()"
+              class="h-4 w-4 rounded border-gray-300 text-gray-900 focus:ring-gray-900/20 cursor-pointer"
+            />
+            <label for="remember" class="text-sm font-normal text-gray-700 cursor-pointer select-none">
+              Remember for 30 days
+            </label>
+          </div>
+          <a
+            href="#"
+            class="text-sm font-semibold text-gray-900 hover:text-gray-700 hover:underline transition-colors focus:outline-none focus:underline"
+          >
+            Forgot password
+          </a>
+        </div>
+
+
+        <div class="space-y-3 pt-1">
+          <button
+            type="submit"
+            class="w-full py-2.5 px-4 bg-[#111827] hover:bg-[#1f2937] text-white text-sm font-semibold rounded-lg shadow-sm transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 cursor-pointer text-center"
+          >
+            Sign in
+          </button>
+
+          <button
+            type="button"
+            class="w-full py-2.5 px-4 bg-white hover:bg-gray-50 border border-gray-300 text-gray-700 text-sm font-semibold rounded-lg shadow-xs transition-colors duration-150 flex items-center justify-center gap-2.5 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 cursor-pointer"
+          >
+            <img class="google-icon" src="./assets/icons/google-icon.svg" alt="Google Icon">
+            <span>Sign in with Google</span>
+          </button>
+        </div>
+      </form>
+
+      <footer class="mt-8 text-center text-sm text-gray-500">
+        Don't have an account?
+        <a
+          href="/auth/signup"
+          class="font-semibold text-gray-900 hover:text-gray-700 hover:underline transition-colors focus:outline-none focus:underline"
+        >
+          Sign up for free
+        </a>
+      </footer>
+    </div>
+  </main>
+</div>
