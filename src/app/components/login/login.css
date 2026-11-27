@@ -1,0 +1,36 @@
+:host {
+  display: block;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.login-wrapper {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.login-image-pane {
+  background-color: #0b291d;
+  min-height: 100vh;
+}
+
+input[type="checkbox"] {
+  accent-color: #111827;
+}
+
+button:active {
+  transform: scale(0.99);
+}
+
+.pass-eye-container {
+  position: absolute;
+}
+
+.pass-eye-img {
+  position: relative;
+}
+
+.google-icon {
+  width: 18px;
+  height: 18px;
+}
