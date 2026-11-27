@@ -9,7 +9,7 @@ export const routes: Routes = [
     {
         path: 'auth/login',
         loadComponent: () => import('./components/login/login').then((c) => c.Login),
-        title: 'Welcome back',
+        title: 'Login | Welcome back',
     },
     {
         path: 'auth/signup',
